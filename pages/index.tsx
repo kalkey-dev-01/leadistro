@@ -8,6 +8,7 @@ const Home: NextPage = () => {
     <div className='bg-black h-screen font-extrabold text-white text-9xl'>
       <h1 className='hover:animate-pulse'>Leadistro</h1>
       <h2 className='hover:animate-pulse'>Coming Soon</h2>
+      <h3 className='text-5xl'>Welcome</h3>
     </div>
   )
 }
