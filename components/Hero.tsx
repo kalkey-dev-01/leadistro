@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { } from '@react-three/drei'
 import gsap from 'gsap'
 import { AnimatedBackground } from './misc/AnimatedBackground';
+import { RoundedButton } from './misc/RoundedButton';
 
 interface HeroProps {
 
@@ -21,7 +22,7 @@ export const Hero: React.FC<HeroProps> = ({ }) => {
     if (elContainer) {
         progress = Math.min(1, scrollY / elContainer.clientHeight);
     }
-    
+
 
 
 
@@ -33,12 +34,22 @@ export const Hero: React.FC<HeroProps> = ({ }) => {
                 style={{
                     transform: `translateY(-${progress * 20}vh)`
                 }}
-                className='min-h-screen flex flex-col items-center sticky top-0 -z-10 justify-center  '
+                className='min-h-screen flex flex-col items-center sticky top-0 -z-10 justify-center'
             >
-                <div className="text-4xl md:text-5xl lg:text-7xl xl:text-9xl text-white "> leadistro </div>
-                <div className="text-3xl md:text-4xl lg:text-6xl xl:text-8xl text-white "> An App For Marketing</div>
-                <AnimatedBackground style={{ width: '100%', height: '720px', minHeight: '100%', position: 'absolute', zIndex: -20, transform: `translateY(-${progress * 20}vh)` }}  />
+                {/* See Whats New Pill */}               
 
+                    <div className='h-[50px] w-[175px] relative    border-2 border-white rounded-sm bg-[#0A0708] mb-14'>
+                        <h3 className='z-10 left-[32.5px] top-[7.5px] absolute text-black text-2xl '>Download</h3>
+                        <RoundedButton style={{}} />
+                    </div>
+               
+                <div className='xl:px-64 px-10 '>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white text-center font-light"> Make Your Cold Calls in hand and generate leads with <span className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal'> leadistro </span> </h1>
+                </div>
+                <h6 className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-white"> An App For Marketing</h6>
+                <div className='-z-20 absolute w-full h-full' style={{ transform: `translateY(-${progress * 20}vh)` }}>
+                    <AnimatedBackground style={{}} />
+                </div>
             </div>
 
 
@@ -53,13 +64,3 @@ export const Hero: React.FC<HeroProps> = ({ }) => {
     )
 }
 
-// <div ref={refContainer}
-//     style={{
-//         transform: `translateY(-${progress * 20}vh)`
-//     }}
-//     className='min-h-screen flex flex-col items-center sticky top-0 -z-10 justify-center '
-// >
-//     <div className='text-9xl text-white'>
-//         leadistro
-//     </div>
-// </div>
