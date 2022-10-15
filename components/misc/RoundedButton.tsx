@@ -4,21 +4,19 @@ import { MeshProps, ThreeEvent } from '@react-three/fiber'
 import { StyledCanvas } from './Canvas'
 
 
-interface RBProps {
-    meshProps?: any,
-    style: React.CSSProperties,
-
+interface RBProps { 
+children: React.ReactNode
+className?: string
 }
 
 
-export const RoundedButton: React.FC<RBProps> = ({ style, meshProps }) => {
+export const RoundedButton: React.FC<RBProps> = ({ children,className }) => {
 
     return (
-        <StyledCanvas style={style}>
-            <RoundedBox  visible args={[100, 75, 10]} scale={0} radius={0.55} smoothness={10} {...meshProps}>
-            <MeshDistortMaterial color='white' attach="material" speed={0.7} distort={0.325} />
-                {/* <MeshWobbleMaterial factor={0.055} speed={10} attach={'material'} color={'#0A0708'} /> */}
-            </RoundedBox>
-        </StyledCanvas>
+     <>
+     <div className={`text-white hover:text-black rounded-full text-2xl  px-6 py-2 border-[1.5px] ${className}`}>
+        {children}
+     </div>     
+     </>
     )
 }

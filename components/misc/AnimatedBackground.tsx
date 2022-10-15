@@ -6,7 +6,7 @@ import { StyledCanvas } from "./Canvas";
 
 
 
-export const AnimatedBackground: React.FC<{ style: React.CSSProperties }> = ({ style }) => {
+export const AnimatedBackground: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
     return (
         <>
             <StyledCanvas style={style}>
