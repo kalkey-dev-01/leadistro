@@ -14,7 +14,7 @@ export const RoundedButton: React.FC<RBProps> = ({ children,className }) => {
 
     return (
      <>
-     <div className={`text-white hover:text-black rounded-full text-2xl  px-6 py-2 border-[1.5px] ${className}`}>
+     <div className={`text-white rounded-full text-2xl  px-6 py-2 border-[1.5px] ${className}`}>
         {children}
      </div>     
      </>
