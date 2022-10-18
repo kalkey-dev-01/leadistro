@@ -10,10 +10,12 @@ interface FeatureProps {
 export const Features: React.FC<FeatureProps> = ({ }) => {
     return (
         <>
-            <div className='bg-white min-h-screen text-black text-8xl'>
+            <div className='bg-white min-h-screen text-black flex flex-col space-y-4'>
+                 <div className='flex flex-row'> 
+                      
+                 </div>
 
 
-           
 
 
             </div>
