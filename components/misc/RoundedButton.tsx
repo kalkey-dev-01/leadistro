@@ -24,7 +24,7 @@ export const RoundedButton: React.FC<RBProps> = ({ children, className }) => {
     }
 
     return (
-        <motion.div whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.55 }} className='cursor-pointer font-extrabold px-6 py-2 my-4 text-lg md:text-xl rounded-full border-black border-[1.5px]'>
+        <motion.div whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.55 }} className='cursor-pointer font-extrabold px-6 py-2  text-lg md:text-xl rounded-full border-black border-[1.5px]'>
             <motion.div whileHover={{ scale: 1 }} whileTap={{ scale: 0.95 }}> {children}</motion.div>
         </motion.div>
     )

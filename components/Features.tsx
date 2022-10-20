@@ -2,6 +2,7 @@ import { useInView } from 'framer-motion';
 import * as React from 'react';
 import { BufferGeometry } from 'three';
 import { StyledCanvas } from './misc/Canvas';
+import { Card } from './misc/Card';
 import { RButton, RoundedButton } from './misc/RoundedButton';
 
 
@@ -15,15 +16,29 @@ export const Features: React.FC<FeatureProps> = ({ }) => {
 
     return (
         <>
-            <div className='bg-white min-h-screen text-black flex  flex-col items-center '>
+            <div className='bg-white min-h-screen text-black flex  flex-col items-center py-5 '>
                 <RoundedButton>
                     Features
                 </RoundedButton>
-                <div className="text-3xl md:text-6xl text-center">With all features</div>
-                <div className="text-3xl md:text-6xl text-center">you need</div>
+
+                <div className='container my-5'>
+                    {/* Heading */}
+                    <div className="text-4xl md:text-7xl text-center">With all features</div>
+                    <div className="text-4xl md:text-7xl text-center">you need</div>
+                    {/* Sub Heading */}
+                    <h6 className="mt-5 text-sm font-medium md:text-base px-10 md:px-32 xl:text-lg text-center">Magna id imperdiet semper eu mauris turpis etiam suspendisse consequat. Molestie.</h6>
+                </div>
+
+
+
                 {/* Cards */}
-                
-            
+                <div className="flex flex-col md:flex-row w-full h-[120vh]  items-center md:h-[70vh] py-4 justify-evenly">
+                    <Card image={require(`../assets/leadistro.svg`)} imgHeight={40} imgWidth={40} title={`logo`} description={`logo desc`} />
+                    <Card image={require(`../assets/leadistro.svg`)} imgHeight={40} imgWidth={40} title={`logo`} description={`logo desc`} />
+                    <Card image={require(`../assets/leadistro.svg`)} imgHeight={40} imgWidth={40} title={`logo`} description={`logo desc`} />
+                </div>
+
+
 
 
 
