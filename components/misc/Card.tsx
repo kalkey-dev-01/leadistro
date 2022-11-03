@@ -1,5 +1,5 @@
 import Image, { ImageProps } from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface CardProps {
     image: string,
@@ -10,9 +10,10 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ image, description, title, imgWidth, imgHeight }) => {
+
     return (
         <>
-            <div className="flex flex-col w-[85vw] md:w-[30vw] my-2 rounded-xl h-[60vh] items-center justify-between py-5 px-3 space-y-3 border-2 border-black">
+            <div  className="flex flex-col w-[85vw] md:w-[30vw] my-2 rounded-xl h-[60vh] items-center justify-between py-5 px-3 space-y-3 border-2 border-black">
                 {/* Image */}
                 <Image src={image} alt={`${title}`} width={imgWidth} height={imgHeight} />
                 {/* title */}

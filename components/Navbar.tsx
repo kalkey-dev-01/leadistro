@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { RoundedButton } from './misc/RoundedButton'
+
 import { motion } from "framer-motion"
 interface NavProps {
 
