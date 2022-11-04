@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { } from '@react-three/drei'
 import gsap from 'gsap'
 import { AnimatedBackground } from './misc/AnimatedBackground';
-import { RoundedButton } from './misc/AnimatedButton';
+
 import Image from 'next/image';
 import { motion } from 'framer-motion'
 

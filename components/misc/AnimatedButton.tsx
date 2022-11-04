@@ -17,8 +17,9 @@ const AnimatedButton: React.FC<FollowerButtonProps> = ({ offset, bgOffset, class
             // onEnter={() => console.log('Enter')}
             // onLeave={() => console.log('Leave')}
             // onRotate={(x, y) => console.log('Rotate', x, y)}
+            
             className='atropos'>
-            <div data-atropos-offset={bgOffset} className='cursor-pointer  px-4 py-1.5 rounded-full border-black border-[1.5px]'>
+            <div data-atropos-offset={bgOffset} className='cursor-pointer  px-4 py-2 rounded-full border-black border-[1.5px]'>
                 <h3 data-atropos-offset={offset} className={className}>{text}</h3>
             </div>
         </Atropos>
