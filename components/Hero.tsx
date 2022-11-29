@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image';
 import { motion } from 'framer-motion'
 import { AnimatedText } from './misc/AnimatedTextWord';
+import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 interface HeroProps {
 
@@ -29,8 +30,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
     return (
         <>
             <div
-
-                className="min-h-screen bg-black min-w-full  sticky top-0 -z-10 flex flex-col-reverse items-center justify-center md:flex-row-reverse">
+                className="min-h-screen bg-black min-w-full   flex flex-col-reverse items-center justify-center md:flex-row-reverse">
                 <div className='object-cover md:pl-[50vw] absolute w-full h-full' >
                     <AnimatedBackground />
                 </div>
@@ -45,12 +45,28 @@ const HeroSection: React.FC<{}> = ({ }) => {
 
                 </div>
                 <motion.div transition={{ type: 'spring', stiffness: 25 }} initial={{ y: 100 }} animate={{ y: 10 }} exit={{ y: 0 }} className='z-10 flex-1  flex items-center justify-center flex-col px-2 pr-10'>
-
-
                     <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white  font-light"> Complete your market research using <span className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text'> leadistro </span> </h1>
                     <h6 className="text-base md:text-lg lg:text-xl xl:text-2xl  my-10 font-normal  text-white"> An Application for lite research of your competitors organisation or cold email marketing by extracting information from company domains</h6>
+                </motion.div>
+            </div>
+            <div
+                className="min-h-screen bg-black min-w-full   flex flex-col-reverse items-center justify-center md:flex-row-reverse">
+                <div className='object-cover md:pl-[50vw] absolute w-full h-full' >
+                    <AnimatedBackground />
+                </div>
+                <div className='flex flex-col justify-center items-center'>
+                    <Image src={require('../assets/frame.svg')} alt={'Leadistro Home'} width={480} height={720} objectPosition={'center'} objectFit={'contain'}
+                        className='scale-75 '
+                    />
+                    <div className="text-3xl z-10 absolute items-center text-white">
+                        <Image src={require('../assets/Logoupdate.svg')} alt={'logo'} width={200} height={200} objectFit='contain' objectPosition={'center'} />
+                        <h1 className='text-center'>leadistro</h1>
+                    </div>
 
-
+                </div>
+                <motion.div transition={{ type: 'spring', stiffness: 25 }} initial={{ y: 100 }} animate={{ y: 10 }} exit={{ y: 0 }} className='z-10 flex-1  flex items-center justify-center flex-col px-2 pr-10'>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white  font-light"> Complete your market research using <span className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text'> leadistro </span> </h1>
+                    <h6 className="text-base md:text-lg lg:text-xl xl:text-2xl  my-10 font-normal  text-white"> An Application for lite research of your competitors organisation or cold email marketing by extracting information from company domains</h6>
                 </motion.div>
             </div>
         </>
