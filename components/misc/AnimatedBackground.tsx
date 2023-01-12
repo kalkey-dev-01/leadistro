@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { StyledCanvas } from "./Canvas";
 import { MotionCanvas, motion as threeMotion } from 'framer-motion-3d'
 import { useInView, motion, MotionConfig } from 'framer-motion'
+import { vector3 } from "maath";
 
 
 
@@ -20,8 +21,8 @@ export const AnimatedBackground: React.FC<{ style?: React.CSSProperties }> = ({ 
 
 export default function AnimatedSphere() {
     return <>
-        <Sphere visible args={[1.0, 500, 500]} scale={2}   >
-            <MeshDistortMaterial color='#0A0708' attach="material" speed={1.5} distort={0.725} />
+        <Sphere visible args={[1.0, 500, 500]} scale={2}  >
+            <MeshDistortMaterial color='#E9ECEF' attach="material" speed={1.5} distort={0.725} />
         </Sphere>
     </>
 }

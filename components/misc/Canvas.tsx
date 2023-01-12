@@ -11,10 +11,11 @@ export const StyledCanvas: React.FC<CanvasProps> = ({ style, children, props }) 
 
 
     return (
-        <Canvas style={style} {...props} >
+        <Canvas style={style} {...props}   >
+            
             <OrbitControls enableZoom={false} enableRotate={true} />
             <ambientLight intensity={0.75} />
-            <directionalLight position={[-3, 10, 15]} intensity={1.5} />
+            <directionalLight position={[2, 2, 2]} intensity={1.5} />
             <React.Suspense fallback={null} >
                 {children}
             </React.Suspense>

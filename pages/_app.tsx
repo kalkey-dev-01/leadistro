@@ -1,13 +1,19 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { AnimatePresence } from 'framer-motion'
+import SizeObserver from '../utils/size-observer'
+import ScrollObserver from '../utils/scroll-observer'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <AnimatePresence mode='wait'>
-        <Component {...pageProps} />
-      </AnimatePresence>
+      <SizeObserver>
+        <ScrollObserver>
+       
+            <Component {...pageProps} />
+   
+        </ScrollObserver>
+      </SizeObserver>
     </>
   )
 }
