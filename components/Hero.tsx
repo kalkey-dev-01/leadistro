@@ -6,7 +6,7 @@ import gsap from 'gsap'
 import { AnimatedBackground } from './misc/AnimatedBackground';
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image';
-import { motion } from 'framer-motion'
+
 import { AnimatedText } from './misc/AnimatedTextWord';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { BackgroundPointsCanvas } from './misc/backgroundPoints';
@@ -31,11 +31,30 @@ const HeroSection: React.FC<{}> = ({ }) => {
     return (
         <>
             <div
-                className="min-h-screen bg-gradient-to-bl from-grad-dark-2 via-grad-dark-1 to-grad-dark-0 min-w-full flex flex-col-reverse items-center justify-center md:flex-row-reverse">
-                <div className='object-cover md:pl-[50vw] absolute w-full h-full' >
+                className="min-h-screen bg-black min-w-full flex flex-col-reverse items-center justify-center md:flex-row-reverse">
+                <div className='object-cover  absolute w-full h-full' >
                     <AnimatedBackground />
                 </div>
-                <div className='flex flex-col justify-center items-center '>
+                {/* Logo Animation */}
+                <div>
+                    <Image onLoad={handleImageLoaded} src={require('../assets/Logoupdate.svg')} className='max-w-sm max-h-96 drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]' alt='logo' />
+                </div>
+                {/* Text */}
+                <div  className='z-10 flex-1 text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] flex items-center justify-center flex-col text-center md:text-left '>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light"> Complete your market research using <span className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text'> leadistro </span> </h1>
+                    <h6 className="text-base md:text-lg lg:text-xl xl:text-2xl md:mr-40 my-10 font-normal "> An Application for lite research of your competitors organisation or cold email marketing by extracting information from company domains</h6>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default HeroSection
+
+
+
+{/* Mobile Screen */ }
+{/* <div className='flex flex-col justify-center items-center py-5 px-3'>
                     <Image src={require('../assets/frame.svg')} alt={'Leadistro Home'} width={360} height={640} objectPosition={'center'} objectFit={'contain'}
 
                     />
@@ -46,18 +65,4 @@ const HeroSection: React.FC<{}> = ({ }) => {
                         <Image src={require('../assets/Logoupdate.svg')}  alt={'logo'} width={200} height={200} objectFit='contain' objectPosition={'center'} />
                         <h1 className='text-center font-semibold'>leadistro</h1>
                     </div>
-                </div>
-                <motion.div transition={{ type: 'spring', stiffness: 25 }} initial={{ y: 100 }} animate={{ y: 10 }} exit={{ y: 0 }} className='z-10 flex-1  flex items-center justify-center flex-col px-2 pr-10'>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-grad-dark-8  font-light"> Complete your market research using <span className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text'> leadistro </span> </h1>
-                    <h6 className="text-base md:text-lg lg:text-xl xl:text-2xl  my-10 font-normal  text-grad-dark-7"> An Application for lite research of your competitors organisation or cold email marketing by extracting information from company domains</h6>
-                </motion.div>
-            </div>
-        </>
-    )
-}
-
-export default HeroSection
-
-
-
-
+                </div> */}

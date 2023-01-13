@@ -1,18 +1,18 @@
 import React, { Ref, Suspense } from "react";
 import { Sphere, OrbitControls, MeshDistortMaterial } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, ThreeElements, useFrame } from '@react-three/fiber'
 import { StyledCanvas } from "./Canvas";
 import { MotionCanvas, motion as threeMotion } from 'framer-motion-3d'
 import { useInView, motion, MotionConfig } from 'framer-motion'
-import { vector3 } from "maath";
-
+import { Vector3,Clock, Mesh } from "three/src/Three";
+import {} from 'maath'
 
 
 
 export const AnimatedBackground: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
     return (
         <>
-            <StyledCanvas style={style}  >
+            <StyledCanvas style={style}   >
                 <AnimatedSphere />
             </StyledCanvas>
         </>
@@ -20,24 +20,14 @@ export const AnimatedBackground: React.FC<{ style?: React.CSSProperties }> = ({ 
 }
 
 export default function AnimatedSphere() {
+    
+   
+
     return <>
-        <Sphere visible args={[1.0, 500, 500]} scale={2}  >
-            <MeshDistortMaterial color='#E9ECEF' attach="material" speed={1.5} distort={0.725} />
+        <Sphere visible scale={2} position={new Vector3(1.75,-0.5,3)} >
+            <MeshDistortMaterial   color='#212529' attach="material" speed={1.5} distort={0.595} />
         </Sphere>
     </>
 }
 
 
-export const StyledAnimatedBg: React.FC<{}> = () => {
-    return (
-        <>
-            <MotionConfig transition={{ type: 'spring' }}>
-                <motion.div>
-                    <MotionCanvas fallback={null} >
-                        <AnimatedSphere />
-                    </MotionCanvas>
-                </motion.div>
-            </MotionConfig>
-        </>
-    )
-}

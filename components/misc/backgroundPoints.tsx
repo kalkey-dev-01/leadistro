@@ -42,7 +42,7 @@ export default function BackgroundPointsAnimation(props: any) {
 
 export const BackgroundPointsCanvas:React.FC<{}> = () =>{
     return (
-      <Canvas orthographic={true} camera={{zoom: 200}} flat linear style={{height:'500px'}} >
+      <Canvas orthographic={true} camera={{zoom: 200}}  style={{height:'480px'}} >
       <color attach={'background'} args={["#000"]} />
             <BackgroundPointsAnimation />
         </Canvas>
