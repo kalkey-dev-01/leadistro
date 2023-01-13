@@ -4,7 +4,8 @@ import AnimatedSphere, { AnimatedBackground } from './misc/AnimatedBackground';
 
 import Image from 'next/image';
 import { Canvas } from '@react-three/fiber';
-import { Vector3 } from 'three/src/Three';
+
+import { OrbitControls } from '@react-three/drei';
 
 
 
@@ -30,11 +31,12 @@ const HeroSection: React.FC<{}> = ({ }) => {
         <div
 
             className="min-h-screen bg-black min-w-full flex flex-col-reverse items-center justify-center md:flex-row-reverse">
-            <div className='object-cover absolute w-full h-full'>
-                <Canvas orthographic >
+            <div className='object-cover absolute  w-full h-full'>
+                <Canvas >
+                    <OrbitControls enableZoom={false} enableRotate={false} />
                     <ambientLight intensity={0.75} />
-                    <directionalLight position={new Vector3(-8.5, 3, -10)} intensity={1.5} />
-                    <React.Suspense fallback={<h1 className='Something went wrong'></h1>} >
+                    <directionalLight position={[-8.5, 3, -10]} intensity={1.5} />
+                    <React.Suspense fallback={<h1 className='text-white'>Something went wrong</h1>} >
                         <AnimatedSphere />
                     </React.Suspense>
                 </Canvas>

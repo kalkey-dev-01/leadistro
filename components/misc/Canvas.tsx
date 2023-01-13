@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Canvas, ThreeEvent } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import { Vector3 } from 'three/src/Three';
+
 interface CanvasProps {
     style?: React.CSSProperties
     children: React.ReactNode,
