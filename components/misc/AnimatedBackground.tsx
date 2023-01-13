@@ -24,7 +24,7 @@ export default function AnimatedSphere() {
    
 
     return <>
-        <Sphere visible scale={2} position={new Vector3(1.75,-0.5,3)} >
+        <Sphere visible args={[1.0, 500, 500]} scale={2} position={new Vector3(1.75,-0.5,3)} >
             <MeshDistortMaterial   color='#212529' attach="material" speed={1.5} distort={0.595} />
         </Sphere>
     </>
