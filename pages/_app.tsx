@@ -3,17 +3,20 @@ import type { AppProps } from 'next/app'
 
 import SizeObserver from '../utils/size-observer'
 import ScrollObserver from '../utils/scroll-observer'
+import MouseObserver from '../utils/mouse-observer'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return (
+  return (    
     <>
-      <SizeObserver>
-        <ScrollObserver>
-       
+      <MouseObserver>
+        <SizeObserver>
+          <ScrollObserver>
+
             <Component {...pageProps} />
-   
-        </ScrollObserver>
-      </SizeObserver>
+
+          </ScrollObserver>
+        </SizeObserver>
+      </MouseObserver>
     </>
   )
 }

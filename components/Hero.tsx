@@ -1,11 +1,14 @@
 import * as React from 'react'
 
-import AnimatedSphere, { AnimatedBackground } from './misc/AnimatedBackground';
+import AnimatedSphere from './misc/AnimatedBackground';
 
 import Image from 'next/image';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 
-import { OrbitControls } from '@react-three/drei';
+import { MeshDistortMaterial, OrbitControls, Sphere } from '@react-three/drei';
+
+import { ScrollContext } from '../utils/scroll-observer';
+import { MouseContext } from '../utils/mouse-observer';
 
 
 
@@ -14,39 +17,45 @@ interface HeroProps {
 }
 
 
+
 const HeroSection: React.FC<{}> = ({ }) => {
     const [imageLoaded, setImageLoaded] = React.useState(false);
     const handleImageLoaded = React.useCallback(() => {
         setImageLoaded(true);
     }, [])
-    // const refContainer = React.useRef<HTMLDivElement>(null);
-    // const { scrollY } = React.useContext(ScrollContext);
-    // let progress = 0;
-    // const { current: elContainer } = refContainer;
-    // if (elContainer) {
-    //     progress = Math.min(1, scrollY / elContainer.clientHeight);
-    // }
+
+    const { scrollY } = React.useContext(ScrollContext)
+    const numX = 1.5 - (scrollY * 0.009)
+    const numZ = 3 - (scrollY * 0.005)
+    const lightZ = -7 + (scrollY * 0.05)
+    const distort = 0.25
+    const { x, y } = React.useContext(MouseContext)
+
+    console.log(x, 'x');
+    console.log(y, 'y');
+
     return (
 
-        <div
-
-            className="min-h-screen bg-black min-w-full flex flex-col-reverse items-center justify-center md:flex-row-reverse">
+        <div className="min-h-screen bg-black min-w-full flex flex-col-reverse items-center justify-center md:flex-row-reverse">
             <div className='object-cover absolute  w-full h-full'>
-                <Canvas >
+                <Canvas shadows  >
                     <OrbitControls enableZoom={false} enableRotate={false} />
                     <ambientLight intensity={0.75} />
-                    <directionalLight position={[-8.5, 3, -10]} intensity={1.5} />
-                    <React.Suspense fallback={<h1 className='text-white'>Something went wrong</h1>} >
-                        <AnimatedSphere />
+                    <directionalLight position={[-7.5, 3, lightZ]} intensity={2.5} />
+                    <React.Suspense fallback={null}>
+                        <Sphere visible args={[1.0, 500, 500]} scale={2} position={[numX >= -1.5 ? numX : -1.5, 0, 3]} >
+                            <MeshDistortMaterial color='#212529' attach="material" speed={1.5} distort={distort} />
+                        </Sphere>
                     </React.Suspense>
                 </Canvas>
             </div>
             {/* Logo Animation */}
             <div className={`flex-grow-0 pt-10 transition-all duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0 scale-90 translate-x-4'}`}>
-                <Image onLoad={handleImageLoaded} src={require('../assets/Logoupdate.svg')} className='max-w-sm max-h-96 drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]' alt='logo' />
+                <Image onLoad={handleImageLoaded} src={require('../assets/frame.svg')} width={360} height={512} className='drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]' alt='phone' />
+
             </div>
             {/* Text */}
-            <div className='z-10 flex-1 text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] flex items-center justify-center flex-col text-center md:text-left '>
+            <div className='z-10 flex-1 px-2 text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] flex items-center justify-center flex-col text-center md:text-left '>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light"> Complete your market research using <span className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text'> leadistro </span> </h1>
                 <h6 className="text-base md:text-lg lg:text-xl xl:text-2xl md:mr-40 my-10 font-normal "> An Application for lite research of your competitors organisation or cold email marketing by extracting information from company domains</h6>
             </div>
