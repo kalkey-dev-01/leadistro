@@ -11,9 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <MouseObserver>
         <SizeObserver>
           <ScrollObserver>
-
             <Component {...pageProps} />
-
           </ScrollObserver>
         </SizeObserver>
       </MouseObserver>

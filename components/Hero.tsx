@@ -29,10 +29,10 @@ const HeroSection: React.FC<{}> = ({ }) => {
     const numZ = 3 - (scrollY * 0.005)
     const lightZ = -7 + (scrollY * 0.05)
     const distort = 0.25
-    const { x, y } = React.useContext(MouseContext)
+    // const { x, y } = React.useContext(MouseContext)
 
-    console.log(x, 'x');
-    console.log(y, 'y');
+    // console.log(x, 'x');
+    // console.log(y, 'y');
 
     return (
 
@@ -43,7 +43,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
                     <ambientLight intensity={0.75} />
                     <directionalLight position={[-7.5, 3, lightZ]} intensity={2.5} />
                     <React.Suspense fallback={null}>
-                        <Sphere visible args={[1.0, 500, 500]} scale={2} position={[numX >= -1.5 ? numX : -1.5, 0, 3]} >
+                        <Sphere visible args={[1.0, 500, 500]} scale={2} position={[numX >= -1.5 ? numX : -1.5, 0, numZ]} >
                             <MeshDistortMaterial color='#212529' attach="material" speed={1.5} distort={distort} />
                         </Sphere>
                     </React.Suspense>
@@ -51,7 +51,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
             </div>
             {/* Logo Animation */}
             <div className={`flex-grow-0 pt-10 transition-all duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0 scale-90 translate-x-4'}`}>
-                <Image onLoad={handleImageLoaded} src={require('../assets/frame.svg')} width={360} height={512} className='drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]' alt='phone' />
+                <Image onLoad={handleImageLoaded} src={require('../assets/frame.svg')} width={240} height={480} className='drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]' alt='phone' />
 
             </div>
             {/* Text */}
