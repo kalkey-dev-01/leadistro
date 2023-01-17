@@ -35,14 +35,14 @@ export default function BackgroundPointsAnimation(props: any) {
 
   return (
     <Points positions={final} stride={3} ref={pointsRef} {...props}>
-      <pointsMaterial size={1.1} />
+      <pointsMaterial size={1.05} />
     </Points>
   );
 }
 
 export const BackgroundPointsCanvas:React.FC<{}> = () =>{
     return (
-      <Canvas orthographic={true} camera={{zoom: 200}}  style={{height:'480px'}} >
+      <Canvas orthographic={true} camera={{zoom: 200}}   >
       <color attach={'background'} args={["#000"]} />
             <BackgroundPointsAnimation />
         </Canvas>
