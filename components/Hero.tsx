@@ -28,44 +28,44 @@ const HeroSection: React.FC<{}> = ({ }) => {
     }, [])
     const { x, y } = React.useContext(MouseContext)
     const { scrollY } = React.useContext(ScrollContext)
-    // const { innerWidth } = React.useContext(SizeContext)
+    const { innerWidth } = React.useContext(SizeContext)
 
     const numX = 1.5 - (scrollY * 0.009)
     const numZ = 3 - (scrollY * 0.005)
     const lightZ = -7 + (scrollY * 0.05)
-    const distort = 0.25 + (x * y)
+    const distort = 0.25 * (x * y + (scrollY * 0.005))
 
 
 
     // console.log(x, 'x');
     // console.log(y, 'y');
     // console.log(distort);
-    const ref = React.useRef<Mesh>(null)
+    const ref = React.useRef<HTMLCanvasElement>(null)
+
 
     return (
 
-        <div className="min-h-screen bg-black min-w-full flex flex-col-reverse items-center justify-center md:flex-row-reverse">
-            <div className='object-cover absolute h-full min-w-full'>
-                <Canvas shadows  >
+        <div className="min-h-screen bg-black min-w-full flex flex-col-reverse items-center py-2 justify-center md:flex-row-reverse">
+            <div className='object-cover absolute w-full h-screen' >
+                <Canvas shadows ref={ref}  >
                     <OrbitControls enableZoom={false} enableRotate={false} />
                     <ambientLight intensity={0.75} />
                     <directionalLight position={[-7.5, 3, lightZ]} intensity={2.5} />
                     <React.Suspense fallback={null}>
-                        <Sphere ref={ref} visible args={[1.0, 500, 500]} scale={2} position={[numX >= -1.5 ? numX : -1.5, 0, numZ]}  >
+                        <Sphere ref={ref} visible args={[1.0, 500, 500]} scale={innerWidth < 640 ? 1.5 : 2} position={[numX >= -1.5 ? numX : -1.5, 0, numZ]}  >
                             <MeshDistortMaterial color='#212529' attach="material" speed={1.5} distort={distort} />
                         </Sphere>
                     </React.Suspense>
                 </Canvas>
             </div>
             {/* Logo Animation */}
-            <div className={`flex-grow-0 flex flex-col justify-center items-center py-5 px-3 pt-10 transition-all duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0 scale-90 translate-x-4'}`}>
-                <Image onLoad={handleImageLoaded} src={require('../assets/frame.svg')} width={480 / 1.3} height={720 / 1.3} className='drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]' alt='phone' />
-                <div className={`z-10 absolute items-center`} style={{height:'480px', width:'260px'}}>
+            <div className={` flex flex-col justify-center items-center   transition-all duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0 scale-90 translate-x-4'}`}>
+                <Image onLoad={handleImageLoaded} src={require('../assets/frame.svg')} width={480 / 1.3} height={720 / 1.3} className='absolute drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]' alt='phone' />
+                <div className={`z-10 object-cover absolute h-80 md:h-[512px] px-1`}>
                     <BackgroundPointsCanvas />
                 </div>
-                <div className="z-20 absolute text-2xl text-white bg-black rounded-2xl">
-                    <Image src={require('../assets/Logoupdate.svg')} alt={'logo'} width={150} height={150} objectFit='contain' objectPosition={'center'} />
-                    <h1 className='text-center font-semibold'>leadistro</h1>
+                <div className="z-20 absolute pt-2 ">
+                    <Image src={require('../assets/LeadistroNativeLogo.svg')} alt={'logo'} width={150} height={150} objectFit='contain' objectPosition={'center'} />
                 </div>
             </div>
             {/* Text */}
@@ -73,7 +73,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
                 <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light"> Complete your market research using <span className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text'> leadistro </span> </h1>
                 <h6 className="text-base md:text-lg lg:text-xl xl:text-2xl md:mr-40 my-10 font-normal "> An Application for lite research of your competitors organisation or cold email marketing by extracting information from company domains</h6>
             </div>
-        </div>
+        </div >
 
     )
 }
