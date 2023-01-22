@@ -38,7 +38,7 @@ export const Features: React.FC<FeatureProps> = ({ }) => {
 
     return (
         <>
-            <div className='bg-white min-h-screen text-black flex  flex-col items-center py-5 '>
+            <div className='bg-white min-h-screen text-black flex  flex-col items-center  '>
 
 
                 <AnimatedButton bgOffset='3' offset='12' className='text-2xl font-normal' text='Features' />
