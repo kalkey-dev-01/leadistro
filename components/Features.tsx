@@ -53,26 +53,6 @@ export const Features: React.FC<FeatureProps> = ({ }) => {
                 </div>
 
 
-                {/* Cards */}
-                {/* <div ref={ref} className="flex flex-col md:flex-row w-full h-[120vh]  items-center md:h-[70vh] py-4 justify-evenly">
-                    <Card image={require(`../assets/leadistro.svg`)} imgHeight={40} imgWidth={40} title={`logo`} description={`logo desc`} />
-                    <Card image={require(`../assets/leadistro.svg`)} imgHeight={40} imgWidth={40} title={`logo`} description={`logo desc`} />
-                    <Card image={require(`../assets/leadistro.svg`)} imgHeight={40} imgWidth={40} title={`logo`} description={`logo desc`} />
-                </div> */}
-                <Carousel>
-                    <CarouselItem index={0}>
-                        <ImageComponents imageLink='leadimg' Title='Leadistro' desc='Description' />
-                    </CarouselItem>
-                    <CarouselItem index={1}>
-                        <ImageComponents imageLink='leadimg' Title='is' desc='Description' />
-                    </CarouselItem>
-                    <CarouselItem index={2} >
-                        <ImageComponents imageLink='leadimg' Title='a' desc='Description' />
-                    </CarouselItem>
-                    <CarouselItem index={3}>
-                        <ImageComponents imageLink='leadimg' Title='Marketing tool' desc='Description' />
-                    </CarouselItem>
-                </Carousel>
 
 
 

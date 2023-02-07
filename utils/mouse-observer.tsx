@@ -13,7 +13,7 @@ export const MouseContext = React.createContext<MouseValue>({
 const MouseObserver: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const [coord, setCoord] = React.useState({ x: 0, y: 0 })
-    const handleMouseMove = React.useCallback((e: { clientX: any; clientY: any; }) => {
+    const handleMouseMove = React.useCallback((e: { clientX: number; clientY: number; }) => {
         return setCoord({
             x: e.clientX / window.innerWidth,
             y: e.clientY / window.innerHeight

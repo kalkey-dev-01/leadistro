@@ -1,20 +1,20 @@
 import * as React from 'react'
 
-import AnimatedSphere from './misc/AnimatedBackground';
-
+import gsap from 'gsap';
 import Image from 'next/image';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 
 import { MeshDistortMaterial, OrbitControls, Sphere } from '@react-three/drei';
-
+import Lottie from "lottie-web";
 import { ScrollContext } from '../utils/scroll-observer';
 import { MouseContext } from '../utils/mouse-observer';
 import { SizeContext } from '../utils/size-observer'
 import { Mesh } from 'three';
 import { BackgroundPointsCanvas } from './misc/backgroundPoints';
 import Atropos from 'atropos/react';
-
-
+import ScrollTrigger from 'gsap';
+import LeadistroAnimatedPhone from '../assets/leadistrolottie.json'
+gsap.registerPlugin(ScrollTrigger)
 
 interface HeroProps {
 
@@ -22,7 +22,9 @@ interface HeroProps {
 
 
 
+
 const HeroSection: React.FC<{}> = ({ }) => {
+
     const [imageLoaded, setImageLoaded] = React.useState(false);
     const handleImageLoaded = React.useCallback(() => {
         setImageLoaded(true);
@@ -30,30 +32,40 @@ const HeroSection: React.FC<{}> = ({ }) => {
     const { x, y } = React.useContext(MouseContext)
     const { scrollY } = React.useContext(ScrollContext)
     const { innerWidth } = React.useContext(SizeContext)
-
     const numX = 1.5 - (scrollY * 0.001)
-  
-    const numY = (scrollY * 0.002) >= 0.575 ? -3.2 : 3.2 - (scrollY * 0.025)
-    const numZ = innerWidth <= 480 ? (3 + scrollY * 0.0031) : (3 - scrollY * 0.003)
+    const numY = (scrollY * 0.0012) >= 0.675 ? -2.5 : 3.5 - (scrollY * 0.0125)
+    // const numZ = innerWidth <= 480 ? (2.25 + scrollY * 0.0031) : (2.25 - scrollY * 0.003)
+    const numZ = (numY < -0.2 ? (2.25 - scrollY * 0.002) : (2.25 + scrollY * 0.0012))
     const lightZ = 10 + (scrollY * 0.05)
     const lightX = ((-x * 2) - .5) - (scrollY * 0.009)
     const lightY = 3 - (y * scrollY * 0.01)
     const distort = 0.2 + scrollY * 0.0005
     // const zoomMag = 100 + (scrollY * 0.5)
-
-
-
     // console.log(x, 'x');
-    // console.log(y, 'y');
+    console.log(scrollY, 'ScrollY');
     console.log(numZ, 'NumZ');
-    console.log(scrollY * 0.001, 'scrY / 100');
+    console.log(numY, 'NumY');
     const ref = React.useRef<Mesh>(null)
-
+    const lottieContainer = React.useRef<HTMLDivElement>(null)
+    React.useEffect(() => {
+        const LottieInstance = Lottie.loadAnimation({
+            container: lottieContainer.current!,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: require("../assets/leadistrolottie.json"),
+            rendererSettings: {
+                progressiveLoad: false,
+                hideOnTransparent: true,
+            },
+        });
+        return () => LottieInstance.destroy();
+    }, []);
 
     return (
         <div className="min-h-[201.5vh] bg-black min-w-full flex flex-col items-center py-2 justify-start text-center">
             {/* Background Animation */}
-            <div className='object-cover absolute w-full  h-[200vh]' >
+            <div className='object-cover absolute w-full h-[200vh]' >
                 <Canvas shadows   >
                     <OrbitControls enableZoom={false} enableRotate={false} />
                     <ambientLight intensity={0.75} />
@@ -69,7 +81,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
                     </React.Suspense>
                 </Canvas>
             </div>
-            <div className='z-10 py-24  text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] flex items-center justify-center flex-col   '>
+            <div className='z-10 py-24 text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] flex items-center justify-center flex-col   '>
                 {/* Title && Subtitle */}
                 <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light">Revolutionize Your Email Marketing with <span className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text'> leadistro </span> </h1>
                 <h6 className="text-base md:text-lg lg:text-xl xl:text-2xl my-10 font-normal "> Unlock the full potential of your campaigns with our powerful market researcher app</h6>
@@ -78,7 +90,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
                     <button data-atropos-offset={5}>
                         <div data-atropos-offset={12} className='flex flex-row bg-black text-white border-white border-[1.75px] px-4 py-2 rounded-full items-center space-x-2 justify-between' >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path   strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                             </svg>
                             <div data-atropos-offset={7} > Download </div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -88,12 +100,12 @@ const HeroSection: React.FC<{}> = ({ }) => {
                     </button>
                 </Atropos>
             </div>
-            <Image src={require('../assets/leadistroNativeMockupMainScreenSearched.png')} width={480} height={720} objectFit='contain' alt='leadistroAi' 
-            className='pt-10'
-            />
-
-
-
+            <div className={` flex flex-col justify-center items-center   `}>
+                <div className=' w-[360px] h-[640px]' ref={lottieContainer} style={{ objectFit: 'contain' }} />
+                {/* <Image onLoad={handleImageLoaded} src={require('../assets/frameRaster.png')} width={360} height={640} objectFit='contain' alt='leadistroAi'
+                    className='absolute drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]'
+                /> */}
+            </div>
         </div >
 
     )
