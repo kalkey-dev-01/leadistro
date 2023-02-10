@@ -6,7 +6,7 @@ import { Canvas } from '@react-three/fiber';
 
 import { MeshDistortMaterial, OrbitControls, Sphere } from '@react-three/drei';
 // import Lottie from "lottie-web";
-import Lottie, { LottieRefCurrentProps } from 'lottie-react'
+import Lottie, { LottieRefCurrentProps, useLottieInteractivity } from 'lottie-react'
 import { ScrollContext } from '../utils/scroll-observer';
 import { MouseContext } from '../utils/mouse-observer';
 import { SizeContext } from '../utils/size-observer'
@@ -15,6 +15,7 @@ import { BackgroundPointsCanvas } from './misc/backgroundPoints';
 import Atropos from 'atropos/react';
 import ScrollTrigger from 'gsap';
 import LeadistroAnimatedPhone from '../assets/leadistrolottie.json'
+
 gsap.registerPlugin(ScrollTrigger)
 
 interface HeroProps {
@@ -26,15 +27,15 @@ interface HeroProps {
 
 const HeroSection: React.FC<{}> = ({ }) => {
 
-    const [imageLoaded, setImageLoaded] = React.useState(false);
-    const handleImageLoaded = React.useCallback(() => {
-        setImageLoaded(true);
-    }, [])
-    const [loop, setLoop] = React.useState<boolean>(false)
+    // const [imageLoaded, setImageLoaded] = React.useState(false);
+    // const handleImageLoaded = React.useCallback(() => {
+    //     setImageLoaded(true);
+    // }, [])
+    // const [loop, setLoop] = React.useState<boolean>(false)
     const { x, y } = React.useContext(MouseContext)
     const { scrollY } = React.useContext(ScrollContext)
     const { innerWidth } = React.useContext(SizeContext)
-    const numX = 1.5 - (scrollY * 0.001)
+    // const numX = 1.5 - (scrollY * 0.001)
     const numY = (scrollY * 0.0012) >= 0.675 ? -2.5 : 3.5 - (scrollY * 0.0125)
     // const numZ = innerWidth <= 480 ? (2.25 + scrollY * 0.0031) : (2.25 - scrollY * 0.003)
     const numZ = (numY < -0.2 ? (2.25 - scrollY * 0.002) : (2.25 + scrollY * 0.0012))
@@ -45,7 +46,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
     // const zoomMag = 100 + (scrollY * 0.5)
     // console.log(scrollY / 1000, 'ScrollY / 1000');
     // console.log(numZ, 'NumZ');
-    console.log(numY, 'NumY');
+    // console.log(numY, 'NumY');
     const lottieContainer = React.useRef<LottieRefCurrentProps>(null)
 
     React.useEffect(() => {
@@ -55,11 +56,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
         //         trigger: lottieEl
         //     }
         // })
-        if (numY > 0) {
-            setLoop(false)
-        } else {
-            setLoop(true)
-        }
+        console.log('Hi from use Effect')
         // const LottieInstance = Lottie.loadAnimation({
         //     container: lottieContainer.current!,
         //     renderer: 'svg',
@@ -72,17 +69,17 @@ const HeroSection: React.FC<{}> = ({ }) => {
         //     },
         // });
         // return () => {
-        //     LottieInstance.destroy();
+        //     lottieEl?.destroy()
         // }
-    }, [numY]);
+    }, []);
 
 
     return (
         <div className="min-h-[201.5vh] bg-black min-w-full flex flex-col  items-center  py-2 justify-start text-center ">
             {/* Background Animation */}
-            <div className='object-cover absolute w-full h-[200vh] touch-none' >
+            <div className='object-cover absolute w-full h-[200vh]' >
                 <Canvas shadows   >
-                    <OrbitControls enableZoom={false} enableRotate={false} />
+                    <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
                     <ambientLight intensity={0.75} />
                     <directionalLight position={[lightX, lightY, lightZ]} intensity={2.5} />
                     <React.Suspense fallback={null}>
@@ -117,7 +114,28 @@ const HeroSection: React.FC<{}> = ({ }) => {
             </div>
             <div className={` flex flex-col justify-center items-center   `}>
                 <Lottie
-                    animationData={LeadistroAnimatedPhone} lottieRef={lottieContainer} autoPlay={false} loop={loop}
+                    animationData={LeadistroAnimatedPhone} lottieRef={lottieContainer}
+                    interactivity={{
+                        mode: 'scroll', actions: [
+                            {
+                                type: 'seek',
+                                visibility: [0, 0.2],
+                                frames: [0, 75],
+
+                            },
+                            {
+                                type: 'seek',
+                                visibility: [0.2, 0.4],
+                                frames: [75, 150]
+                            },
+                            {
+                                type: 'seek',
+                                visibility: [0.6, 1],
+                                frames: [150, 300]
+                            },
+
+                        ]
+                    }} autoPlay={false} loop={false}
                     className='w-[360px] drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] h-[640px]'
                     style={{ objectFit: 'contain' }}
                 />
