@@ -1,15 +1,16 @@
 import * as React from 'react'
 
 import gsap from 'gsap';
-import Image from 'next/image';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+
+import { Canvas } from '@react-three/fiber';
 
 import { MeshDistortMaterial, OrbitControls, Sphere } from '@react-three/drei';
-import Lottie from "lottie-web";
+// import Lottie from "lottie-web";
+import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import { ScrollContext } from '../utils/scroll-observer';
 import { MouseContext } from '../utils/mouse-observer';
 import { SizeContext } from '../utils/size-observer'
-import { Mesh } from 'three';
+
 import { BackgroundPointsCanvas } from './misc/backgroundPoints';
 import Atropos from 'atropos/react';
 import ScrollTrigger from 'gsap';
@@ -29,6 +30,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
     const handleImageLoaded = React.useCallback(() => {
         setImageLoaded(true);
     }, [])
+    const [loop, setLoop] = React.useState<boolean>(false)
     const { x, y } = React.useContext(MouseContext)
     const { scrollY } = React.useContext(ScrollContext)
     const { innerWidth } = React.useContext(SizeContext)
@@ -41,37 +43,50 @@ const HeroSection: React.FC<{}> = ({ }) => {
     const lightY = 3 - (y * scrollY * 0.01)
     const distort = 0.2 + scrollY * 0.0005
     // const zoomMag = 100 + (scrollY * 0.5)
-    // console.log(x, 'x');
-    console.log(scrollY, 'ScrollY');
-    console.log(numZ, 'NumZ');
+    // console.log(scrollY / 1000, 'ScrollY / 1000');
+    // console.log(numZ, 'NumZ');
     console.log(numY, 'NumY');
-    const ref = React.useRef<Mesh>(null)
-    const lottieContainer = React.useRef<HTMLDivElement>(null)
+    const lottieContainer = React.useRef<LottieRefCurrentProps>(null)
+
     React.useEffect(() => {
-        const LottieInstance = Lottie.loadAnimation({
-            container: lottieContainer.current!,
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            animationData: require("../assets/leadistrolottie.json"),
-            rendererSettings: {
-                progressiveLoad: false,
-                hideOnTransparent: true,
-            },
-        });
-        return () => LottieInstance.destroy();
-    }, []);
+        // const lottieEl = lottieContainer.current
+        // gsap.fromTo(lottieEl, { y: 300, opacity: 0, }, {
+        //     y: 50, opacity: 1, duration: 4.5, scrollTrigger: {
+        //         trigger: lottieEl
+        //     }
+        // })
+        if (numY > 0) {
+            setLoop(false)
+        } else {
+            setLoop(true)
+        }
+        // const LottieInstance = Lottie.loadAnimation({
+        //     container: lottieContainer.current!,
+        //     renderer: 'svg',
+        //     loop: false,
+        //     autoplay: false,
+        //     animationData: require("../assets/leadistrolottie.json"),
+        //     rendererSettings: {
+        //         progressiveLoad: false,
+        //         hideOnTransparent: true,
+        //     },
+        // });
+        // return () => {
+        //     LottieInstance.destroy();
+        // }
+    }, [numY]);
+
 
     return (
-        <div className="min-h-[201.5vh] bg-black min-w-full flex flex-col items-center py-2 justify-start text-center">
+        <div className="min-h-[201.5vh] bg-black min-w-full flex flex-col  items-center  py-2 justify-start text-center ">
             {/* Background Animation */}
-            <div className='object-cover absolute w-full h-[200vh]' >
+            <div className='object-cover absolute w-full h-[200vh] touch-none' >
                 <Canvas shadows   >
                     <OrbitControls enableZoom={false} enableRotate={false} />
                     <ambientLight intensity={0.75} />
                     <directionalLight position={[lightX, lightY, lightZ]} intensity={2.5} />
                     <React.Suspense fallback={null}>
-                        <Sphere ref={ref} visible args={[1.0, 500, 500]}
+                        <Sphere visible args={[1.0, 500, 500]}
                             scale={innerWidth < 640 ? 1.5 : 2}
                             position={[0, numY, numZ]}
                         //  position={[numX >= -1.5 ? numX : -1.5, 0, numZ]}
@@ -81,10 +96,10 @@ const HeroSection: React.FC<{}> = ({ }) => {
                     </React.Suspense>
                 </Canvas>
             </div>
-            <div className='z-10 py-24 text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] flex items-center justify-center flex-col   '>
+            <div className='z-10 py-24 px-2 text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] flex items-center  justify-center flex-col   '>
                 {/* Title && Subtitle */}
-                <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light">Revolutionize Your Email Marketing with <span className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text'> leadistro </span> </h1>
-                <h6 className="text-base md:text-lg lg:text-xl xl:text-2xl my-10 font-normal "> Unlock the full potential of your campaigns with our powerful market researcher app</h6>
+                <h1 className="text-3xl  lg:text-5xl xl:text-6xl font-light">Revolutionize Your Email Marketing with <span className='text-4xl  lg:text-6xl xl:text-7xl font-normal '> leadistro </span> </h1>
+                <h6 className="text-base  lg:text-xl xl:text-2xl my-10 font-normal "> Unlock the full potential of your campaigns with our powerful market researcher app</h6>
                 {/* Button */}
                 <Atropos className='atropos'>
                     <button data-atropos-offset={5}>
@@ -101,7 +116,12 @@ const HeroSection: React.FC<{}> = ({ }) => {
                 </Atropos>
             </div>
             <div className={` flex flex-col justify-center items-center   `}>
-                <div className=' w-[360px] h-[640px]' ref={lottieContainer} style={{ objectFit: 'contain' }} />
+                <Lottie
+                    animationData={LeadistroAnimatedPhone} lottieRef={lottieContainer} autoPlay={false} loop={loop}
+                    className='w-[360px] drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] h-[640px]'
+                    style={{ objectFit: 'contain' }}
+                />
+                {/* <div className=' w-[360px] drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] h-[640px]' ref={lottieContainer} style={{ objectFit: 'contain' }}  /> */}
                 {/* <Image onLoad={handleImageLoaded} src={require('../assets/frameRaster.png')} width={360} height={640} objectFit='contain' alt='leadistroAi'
                     className='absolute drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]'
                 /> */}
@@ -118,7 +138,7 @@ export default HeroSection
 {/* Mobile Screen */ }
 {/* <div className={` flex flex-col justify-center items-center   transition-all duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0 scale-90 translate-x-4'}`}>
                 <Image onLoad={handleImageLoaded} src={require('../assets/frame.svg')} width={480 / 1.3} height={720 / 1.3} className='absolute drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]' alt='phone' />
-                <div className={`z-10 object-cover absolute h-80 md:h-[360px] px-1`}>
+                <div className={`z-10 object-cover absolute h-80 360px] px-1`}>
                     <BackgroundPointsCanvas />
                 </div>
                 <div className="z-20 absolute pt-2 ">
