@@ -6,7 +6,7 @@ import { Canvas } from '@react-three/fiber';
 
 import { MeshDistortMaterial, OrbitControls, Sphere } from '@react-three/drei';
 // import Lottie from "lottie-web";
-import Lottie, { LottieRefCurrentProps, useLottieInteractivity } from 'lottie-react'
+import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import { ScrollContext } from '../utils/scroll-observer';
 import { MouseContext } from '../utils/mouse-observer';
 import { SizeContext } from '../utils/size-observer'
@@ -46,16 +46,16 @@ const HeroSection: React.FC<{}> = ({ }) => {
     // const zoomMag = 100 + (scrollY * 0.5)
     // console.log(scrollY / 1000, 'ScrollY / 1000');
     // console.log(numZ, 'NumZ');
-    // console.log(numY, 'NumY');
+    console.log(numY, 'NumY');
     const lottieContainer = React.useRef<LottieRefCurrentProps>(null)
-
+    const AnimatedDivRef = React.useRef<HTMLDivElement>(null)
     React.useEffect(() => {
-        // const lottieEl = lottieContainer.current
-        // gsap.fromTo(lottieEl, { y: 300, opacity: 0, }, {
-        //     y: 50, opacity: 1, duration: 4.5, scrollTrigger: {
-        //         trigger: lottieEl
-        //     }
-        // })
+        const lottieEl = AnimatedDivRef.current
+        gsap.fromTo(lottieEl, { y: 300, opacity: 0, }, {
+            y: 50, opacity: 1, duration: 4.5, scrollTrigger: {
+                trigger: lottieEl
+            }
+        })
         console.log('Hi from use Effect')
         // const LottieInstance = Lottie.loadAnimation({
         //     container: lottieContainer.current!,
@@ -75,11 +75,13 @@ const HeroSection: React.FC<{}> = ({ }) => {
 
 
     return (
-        <div className="min-h-[201.5vh] bg-black min-w-full flex flex-col  items-center  py-2 justify-start text-center ">
+        <div className={` ${innerWidth < 450 ? 'min-h-[141.5vh]' : 'min-h-[201.5vh]'}  bg-black min-w-full flex flex-col  items-center  py-2 justify-start text-center`}>
             {/* Background Animation */}
-            <div className='object-cover absolute w-full h-[200vh]' >
-                <Canvas shadows   >
-                    <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+            <div className={`object-cover absolute w-full ${innerWidth < 450 ? 'h-[140vh]' : 'h-[200vh]'}  `} >
+                <Canvas shadows onTouchStart={(e) => {
+                    e.preventDefault()
+
+                }} >
                     <ambientLight intensity={0.75} />
                     <directionalLight position={[lightX, lightY, lightZ]} intensity={2.5} />
                     <React.Suspense fallback={null}>
@@ -112,30 +114,10 @@ const HeroSection: React.FC<{}> = ({ }) => {
                     </button>
                 </Atropos>
             </div>
-            <div className={` flex flex-col justify-center items-center   `}>
+            <div ref={AnimatedDivRef} className={` flex flex-col justify-center items-center   `}>
                 <Lottie
                     animationData={LeadistroAnimatedPhone} lottieRef={lottieContainer}
-                    interactivity={{
-                        mode: 'scroll', actions: [
-                            {
-                                type: 'seek',
-                                visibility: [0, 0.2],
-                                frames: [0, 75],
-
-                            },
-                            {
-                                type: 'seek',
-                                visibility: [0.2, 0.4],
-                                frames: [75, 150]
-                            },
-                            {
-                                type: 'seek',
-                                visibility: [0.6, 1],
-                                frames: [150, 300]
-                            },
-
-                        ]
-                    }} autoPlay={false} loop={false}
+                    autoPlay={false} loop={numY > 0 ? false : true}
                     className='w-[360px] drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] h-[640px]'
                     style={{ objectFit: 'contain' }}
                 />
