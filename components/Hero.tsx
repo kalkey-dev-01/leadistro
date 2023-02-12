@@ -53,13 +53,13 @@ const HeroSection: React.FC<{}> = ({ }) => {
     React.useEffect(() => {
         const lottieEl = AnimatedDivRef.current
         gsap.fromTo(lottieEl, { y: 300, opacity: 0, }, {
-            y: 50, opacity: 1, duration: 4.5, scrollTrigger: {
+            y: 0, opacity: 1, duration: 4.5, scrollTrigger: {
                 trigger: lottieEl
             }
         })
         const headEl = headingRef.current
-        gsap.fromTo(headEl, { y: 200, opacity: 0, }, {
-            y: -40, opacity: 1, duration: 4.5, scrollTrigger: {
+        gsap.fromTo(headEl, { y: 100, opacity: 0, }, {
+            y: -35, opacity: 1, duration: 3.5, scrollTrigger: {
                 trigger: headEl
             }
         })
@@ -81,9 +81,9 @@ const HeroSection: React.FC<{}> = ({ }) => {
 
 
     return (
-        <div className={` ${innerWidth < 450 ? 'min-h-[141.5vh]' : 'min-h-[201.5vh]'}  bg-black min-w-full flex flex-col  items-center  py-2 justify-start text-center`}>
+        <div className={` ${innerWidth < 450 ? 'min-h-[161.5vh]' : 'min-h-[201.5vh]'}  bg-black min-w-full flex flex-col  items-center  py-2 justify-start text-center`}>
             {/* Background Animation */}
-            <div className={`object-cover absolute w-full ${innerWidth < 450 ? 'h-[140vh]' : 'h-[200vh]'}  `} >
+            <div className={`object-cover absolute w-full ${innerWidth < 450 ? 'h-[160vh]' : 'h-[200vh]'}  `} >
                 <Canvas shadows onTouchStart={(e) => {
                     e.preventDefault()
 
@@ -121,9 +121,9 @@ const HeroSection: React.FC<{}> = ({ }) => {
                 </Atropos>
             </div>
 
-            <div ref={AnimatedDivRef} className={` flex flex-col justify-center items-center   `}>
-                <h3 ref={headingRef} className='text-center  text-white md:text-6xl text-4xl px-2 font-extrabold'>
-                    Welcome a new Marketing experience.
+            <div ref={AnimatedDivRef} className={` flex flex-col justify-center items-center md:justify-between w-full md:flex-row  px-10 `}>
+                <h3 ref={headingRef} className='text-center md:text-left md:leading-snug drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] md:max-w-screen-md  md:tracking-tight       text-white md:text-6xl text-4xl px-2 font-extrabold font-["Comfortaa"]'>
+                    Welcome to a new Marketing experience. Capture Leads, Send cold mails, Acquire Growth.
                 </h3>
                 <Lottie
                     animationData={LeadistroAnimatedPhone} lottieRef={lottieContainer}
