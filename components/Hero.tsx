@@ -49,6 +49,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
     console.log(numY, 'NumY');
     const lottieContainer = React.useRef<LottieRefCurrentProps>(null)
     const AnimatedDivRef = React.useRef<HTMLDivElement>(null)
+    const headingRef = React.useRef<HTMLHeadingElement>(null)
     React.useEffect(() => {
         const lottieEl = AnimatedDivRef.current
         gsap.fromTo(lottieEl, { y: 300, opacity: 0, }, {
@@ -56,7 +57,12 @@ const HeroSection: React.FC<{}> = ({ }) => {
                 trigger: lottieEl
             }
         })
-        console.log('Hi from use Effect')
+        const headEl = headingRef.current
+        gsap.fromTo(headEl, { y: 200, opacity: 0, }, {
+            y: -40, opacity: 1, duration: 4.5, scrollTrigger: {
+                trigger: headEl
+            }
+        })
         // const LottieInstance = Lottie.loadAnimation({
         //     container: lottieContainer.current!,
         //     renderer: 'svg',
@@ -97,7 +103,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
             </div>
             <div className='z-10 py-24 px-2 text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] flex items-center  justify-center flex-col   '>
                 {/* Title && Subtitle */}
-                <h1 className="text-3xl  lg:text-5xl xl:text-6xl font-light">Revolutionize Your Email Marketing with <span className='text-4xl  lg:text-6xl xl:text-7xl font-normal '> leadistro </span> </h1>
+                <h1 className="text-3xl  lg:text-5xl xl:text-6xl font-medium font-['Poppins']">Revolutionize Your Email Marketing with <span className='text-4xl  lg:text-6xl xl:text-7xl font-bold font-["Comfortaa"] '> leadistro </span> </h1>
                 <h6 className="text-base  lg:text-xl xl:text-2xl my-10 font-normal "> Unlock the full potential of your campaigns with our powerful market researcher app</h6>
                 {/* Button */}
                 <Atropos className='atropos'>
@@ -114,7 +120,11 @@ const HeroSection: React.FC<{}> = ({ }) => {
                     </button>
                 </Atropos>
             </div>
+
             <div ref={AnimatedDivRef} className={` flex flex-col justify-center items-center   `}>
+                <h3 ref={headingRef} className='text-center  text-white md:text-6xl text-4xl px-2 font-extrabold'>
+                    Welcome a new Marketing experience.
+                </h3>
                 <Lottie
                     animationData={LeadistroAnimatedPhone} lottieRef={lottieContainer}
                     autoPlay={false} loop={numY > 0 ? false : true}
