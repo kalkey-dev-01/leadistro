@@ -40,17 +40,7 @@ export const Features: React.FC<FeatureProps> = ({ }) => {
         <>
             <div className='bg-white min-h-screen text-black flex py-2 flex-col items-center  '>
 
-
-                <AnimatedButton bgOffset='3' offset='12' className='text-2xl font-normal' text='Features' />
-
-                <div className='container my-5'>
-                    {/* Heading */}
-                    <div className="text-4xl md:text-7xl text-center">With all features</div>
-                    <div className="text-4xl md:text-7xl text-center">you need</div>
-                    {/* Sub Heading */}
-                    <h6 className="mt-5 text-sm font-medium md:text-base px-10 md:px-32 xl:text-lg text-center">Magna id imperdiet semper eu mauris turpis etiam suspendisse consequat. Molestie.</h6>
-
-                </div>
+            
 
 
 

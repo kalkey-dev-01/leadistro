@@ -85,8 +85,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
             {/* Background Animation */}
             <div className={`object-cover absolute w-full ${innerWidth < 450 ? 'h-[160vh]' : 'h-[200vh]'}  `} >
                 <Canvas shadows onTouchStart={(e) => {
-                    e.preventDefault()
-
+                    e.preventDefault();
                 }} >
                     <ambientLight intensity={0.75} />
                     <directionalLight position={[lightX, lightY, lightZ]} intensity={2.5} />
