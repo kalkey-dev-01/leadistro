@@ -12,7 +12,7 @@ export const NavBar: React.FC<NavProps> = ({ }) => {
 
 
   return (
-    <nav className='sticky top-0 border-b-[1px] rounded-br-2xl rounded-bl-2xl border-white z-50 h-[50px] px-2  space-x-4 flex flex-row w-full justify-center items-center bg-black text-white'>
+    <nav className='absolute top-0 border-b-[1px] rounded-br-2xl rounded-bl-2xl border-white z-50 h-[50px] px-2  space-x-4 flex flex-row w-full justify-center items-center bg-black text-white'>
       <div className=' flex flex-1 gap-x-3 '>
         <Image src={require('../assets/leadistroWhite.png')} width={25} height={25} className=' ml-2  drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)]' alt='logo' />
       </div>

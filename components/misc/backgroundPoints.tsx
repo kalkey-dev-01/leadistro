@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import { Canvas, useFrame,CanvasTextureProps } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Quaternion, Vector3 } from "three";
 
 import * as random from "maath/random";
@@ -14,7 +14,7 @@ const q = new Quaternion();
 export default function BackgroundPointsAnimation(props: any) {
   const pointsRef = useRef<THREE.Points>(null!);
   const [{ box, sphere, final }] = useState(() => {
-    const box = random.inBox(new Float32Array(10_000), { sides: [0.85, 0.85, 0.85] });
+    const box = random.inBox(new Float32Array(10_000), { sides: [3.85, 6.85, 3.85] });
     const sphere = random.inSphere(box.slice(0), { radius: 0.75 });
     const final = box.slice(0); // final buffer that will be used for the points mesh
 

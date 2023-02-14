@@ -1,5 +1,6 @@
 import React, { useRef, useContext } from "react";
 import { ScrollContext } from "../utils/scroll-observer";
+import { BackgroundPointsCanvas } from "./misc/backgroundPoints";
 
 
 interface WrapperProps {
@@ -57,7 +58,7 @@ interface Props {
 
 }
 
-export const Features: React.FC<Props> = ({ page, renderContent }) => {
+export const Feature: React.FC<Props> = ({ page, renderContent }) => {
     const { currentPage, numOfPages } = useContext(FContext)
     const refContainer = useRef<HTMLDivElement>(null)
     let progress = Math.max(0, currentPage - page)
@@ -80,8 +81,10 @@ export const FeaturesContainer: React.FC<{ children: React.ReactNode }> = ({ chi
 
 export const FeaturesBackground: React.FC = () => (
     <div className="grid grid-cols-1 lg:grid-cols-2 w-full min-h-screen top-0 sticky">
-        <div className="bg-white h-[30vh] lg:h-auto"></div>
-        <div className="bg-white h-[70vh] lg:min-h-screen"></div>
+        <div className="bg-leadistroDark h-[30vh] lg:h-auto"></div>
+        <div className="bg-black h-[70vh] lg:min-h-screen">
+            <BackgroundPointsCanvas />
+        </div>
     </div>
 )
 export const FeaturesLeft: React.FC<{ progress: number, children: React.ReactNode }> = ({ children, progress }) => {
@@ -90,7 +93,7 @@ export const FeaturesLeft: React.FC<{ progress: number, children: React.ReactNod
     return (
         <div style={{
             transform: `translateY(${translateY}px)`
-        }} className="flex flex-col items-center justify-center text-3xl lg:text-3xl h-[30vh] lg:h-auto" >
+        }} className="flex flex-col md:items-start items-center justify-center text-3xl lg:text-3xl h-[30vh] lg:h-auto" >
             <div className="leading-10"> {children}</div>
         </div>
     )
