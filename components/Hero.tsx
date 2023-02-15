@@ -4,7 +4,7 @@ import gsap from 'gsap';
 
 import { Canvas } from '@react-three/fiber';
 
-import { MeshDistortMaterial, OrbitControls, Sphere } from '@react-three/drei';
+import { MeshDistortMaterial, OrbitControls, Sphere,ScrollControls } from '@react-three/drei';
 // import Lottie from "lottie-web";
 import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import { ScrollContext } from '../utils/scroll-observer';
@@ -42,7 +42,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
     const lightZ = 10 + (scrollY * 0.05)
     const lightX = ((-x * 2) - .5) - (scrollY * 0.009)
     const lightY = 3 - (y * scrollY * 0.01)
-    const distort = 0.2 + scrollY * 0.0005
+    const distort = 0.2 + scrollY * 0.0005 
     // const zoomMag = 100 + (scrollY * 0.5)
     // console.log(scrollY / 1000, 'ScrollY / 1000');
     // console.log(numZ, 'NumZ');
@@ -81,10 +81,10 @@ const HeroSection: React.FC<{}> = ({ }) => {
 
 
     return (
-        <div className={` ${innerWidth < 450 ? 'min-h-[161.5vh]' : 'min-h-[201.5vh]'}  bg-black min-w-full flex flex-col  items-center  py-2 justify-start text-center`}>
+        <div className={` ${innerWidth < 450 ? 'min-h-[161.5vh]' : 'min-h-[211.5vh]'}  bg-black min-w-full flex flex-col  items-center  py-2 justify-start text-center`}>
             {/* Background Animation */}
-            <div className={`object-cover absolute w-full ${innerWidth < 450 ? 'h-[160vh]' : 'h-[200vh]'}  `} >
-                <Canvas shadows onTouchStart={(e) => {
+            <div className={`object-cover absolute w-full ${innerWidth < 450 ? 'h-[160vh]' : 'h-[210vh]'}  `} >
+                <Canvas shadows frameloop='demand' onTouchStart={(e) => {
                     e.preventDefault();
                 }} >
                     <ambientLight intensity={0.75} />
@@ -95,7 +95,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
                             position={[0, numY, numZ]}
                         //  position={[numX >= -1.5 ? numX : -1.5, 0, numZ]}
                         >
-                            <MeshDistortMaterial color='#212529' attach="material" speed={1.5} distort={distort} />
+                            <MeshDistortMaterial color='#212529' attach="material" speed={1.5} distort={numY > -2.5 ?  distort : 0} />
                         </Sphere>
                     </React.Suspense>
                 </Canvas>
@@ -121,7 +121,7 @@ const HeroSection: React.FC<{}> = ({ }) => {
             </div>
 
             <div ref={AnimatedDivRef} className={` flex flex-col justify-center items-center md:justify-between w-full md:flex-row  px-10 `}>
-                <h3 ref={headingRef} className='text-center md:text-left md:leading-snug drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] md:max-w-screen-md  md:tracking-tight       text-white md:text-6xl text-4xl px-2 font-extrabold font-["Comfortaa"]'>
+                <h3 ref={headingRef} className='text-center md:text-left md:leading-snug drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] md:max-w-screen-md  md:tracking-tight       text-white md:text-6xl text-4xl px-2 font-thin font-["Comfortaa"]'>
                     Welcome to a new Marketing experience. Capture Leads, Send cold mails, Acquire Growth.
                 </h3>
                 <Lottie

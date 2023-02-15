@@ -82,9 +82,7 @@ export const FeaturesContainer: React.FC<{ children: React.ReactNode }> = ({ chi
 export const FeaturesBackground: React.FC = () => (
     <div className="grid grid-cols-1 lg:grid-cols-2 w-full min-h-screen top-0 sticky">
         <div className="bg-leadistroDark h-[30vh] lg:h-auto"></div>
-        <div className="bg-black h-[70vh] lg:min-h-screen">
-            <BackgroundPointsCanvas />
-        </div>
+        <div className="bg-black h-[70vh] lg:min-h-screen"></div>
     </div>
 )
 export const FeaturesLeft: React.FC<{ progress: number, children: React.ReactNode }> = ({ children, progress }) => {
